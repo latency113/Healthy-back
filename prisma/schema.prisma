@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/providers/database/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==================================================
+// 1. ตารางข้อมูลผู้ใช้งาน (User)
+// ==================================================
+model User {
+  id          String  @id @default(uuid())
+  lineUserId  String  @unique // ID เฉพาะจากระบบ LINE Webhook (ใช้เชื่อมโยงกับแชทบอท)
+  displayName String? // ชื่อโปรไฟล์ LINE ของผู้ใช้ (เผื่อดึงมาแสดงผลทักทาย)
+  birthday    DateTime?
+
+  // ข้อมูลส่วนตัวเพื่อนำไปคำนวณเป้าหมายสุขภาพผ่านหน้า LIFF App (มีหรือไม่มีก็ได้)
+  gender           String? // เพศ (MALE / FEMALE)
+  weight           Float? // น้ำหนักล่าสุด (กิโลกรัม)
+  height           Float? // ส่วนสูง (เซนติเมตร)
+  dailyCalorieGoal Int     @default(2000) // เป้าหมายแคลอรีต่อวัน (ปรับเปลี่ยนได้ผ่านหน้าตั้งเป้าหมาย)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // ความสัมพันธ์ (Relationships)
+  foodLogs  FoodLog[] // 1 คน สามารถบันทึกประวัติการกินได้หลายครั้ง
+  feedbacks Feedback[] // 1 คน สามารถส่งรายงานปัญหาหรือข้อเสนอแนะได้หลายครั้ง
+}
+
+// ==================================================
+// 2. ตารางประวัติการกินอาหาร (FoodLog)
+// ==================================================
+model FoodLog {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  foodName String // ชื่อเมนูอาหารที่ AI วิเคราะห์หรือผู้ใช้พิมพ์เข้ามา
+  calories Float // ปริมาณพลังงาน (kcal)
+  protein  Float // โปรตีน (กรัม)
+  fat      Float // ไขมัน (กรัม)
+  carbs    Float // คาร์โบไฮเดรต (กรัม)
+
+  imageUrl   String? // URL ของรูปภาพอาหาร (กรณีผู้ใช้ส่งรูปมา และเราเซฟลง Cloud Storage)
+  sourceType String // แหล่งที่มาของข้อมูล เช่น "IMAGE" (ส่งรูป) หรือ "TEXT" (พิมพ์สั่ง)
+
+  loggedAt DateTime @default(now()) // วันเวลาที่บันทึกรายการกิน
+}
+
+// ==================================================
+// 3. ตารางบันทึกการแจ้งปัญหาและข้อเสนอแนะ (Feedback)
+// ==================================================
+// รองรับปุ่ม "แจ้งปัญหาการใช้งาน" บน Rich Menu เผื่อผู้ใช้พิมพ์รายงานเข้ามา
+model Feedback {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  message String // ข้อความที่แจ้งปัญหาหรือข้อเสนอแนะ
+  status  String @default("PENDING") // สถานะการดำเนินการ (เช่น PENDING, RESOLVED)
+
+  createdAt DateTime @default(now())
+}

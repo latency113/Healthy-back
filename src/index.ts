@@ -1,7 +1,19 @@
 import { Elysia } from "elysia";
+import { cors } from "@elysiajs/cors";
+import { webhookRoutes } from "./routes/webhook.route";
+import { userRoutes } from "./routes/user.route";
+import { adminRoutes } from "./routes/admin.route";
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
+const app = new Elysia()
+  .use(cors({
+    origin: true, // อนุญาตทุกโดเมน (เหมาะสำหรับ Ngrok, Cloudflare, Vercel)
+    credentials: true, // จำเป็นหากต้องส่ง Cookies หรือ Headers พิเศษ
+    allowedHeaders: ['Content-Type', 'ngrok-skip-browser-warning'],
+  }))
+  .get('/', () => 'Health Chatbot Server is running!')
+  .use(webhookRoutes)
+  .use(userRoutes)
+  .use(adminRoutes)
+  .listen(process.env.PORT || 3000);
 
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
+console.log(`🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`);
