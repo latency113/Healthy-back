@@ -13,7 +13,11 @@ const app = new Elysia()
   .get('/', () => 'Health Chatbot Server is running!')
   .use(webhookRoutes)
   .use(userRoutes)
-  .use(adminRoutes)
-  .listen(process.env.PORT || 3000);
+  .use(adminRoutes);
 
-console.log(`🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`);
+if (!process.env.VERCEL) {
+  app.listen(process.env.PORT || 3000);
+  console.log(`🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`);
+}
+
+export default app;
