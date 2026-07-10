@@ -25,6 +25,9 @@ model User {
   gender           String? // เพศ (MALE / FEMALE)
   weight           Float? // น้ำหนักล่าสุด (กิโลกรัม)
   height           Float? // ส่วนสูง (เซนติเมตร)
+  goal             String? // เป้าหมายสุขภาพ (lose / maintain / gain)
+  targetWeight     Float? // น้ำหนักเป้าหมาย (กิโลกรัม)
+  activityLevel    String? // ระดับกิจกรรมออกกำลังกาย (sedentary / light / moderate / heavy / super)
   dailyCalorieGoal Int     @default(2000) // เป้าหมายแคลอรีต่อวัน (ปรับเปลี่ยนได้ผ่านหน้าตั้งเป้าหมาย)
 
   createdAt DateTime @default(now())

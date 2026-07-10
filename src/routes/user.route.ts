@@ -23,7 +23,7 @@ export const userRoutes = new Elysia()
     return { success: true, user };
   })
   .post('/api/submit-user-profile', async ({ body }) => {
-    const { lineUserId, displayName, gender, weight, height, dailyCalorieGoal, birthday } = body as any;
+    const { lineUserId, displayName, gender, weight, height, dailyCalorieGoal, birthday, goal, targetWeight, activityLevel } = body as any;
     if (!lineUserId) {
       throw new Error("lineUserId is required");
     }
@@ -36,6 +36,9 @@ export const userRoutes = new Elysia()
         height: height ? parseFloat(height) : null,
         dailyCalorieGoal: dailyCalorieGoal ? parseInt(dailyCalorieGoal) : 2000,
         birthday: birthday ? new Date(birthday) : null,
+        goal: goal || null,
+        targetWeight: targetWeight ? parseFloat(targetWeight) : null,
+        activityLevel: activityLevel || null,
       },
       create: {
         lineUserId,
@@ -45,6 +48,9 @@ export const userRoutes = new Elysia()
         height: height ? parseFloat(height) : null,
         dailyCalorieGoal: dailyCalorieGoal ? parseInt(dailyCalorieGoal) : 2000,
         birthday: birthday ? new Date(birthday) : null,
+        goal: goal || null,
+        targetWeight: targetWeight ? parseFloat(targetWeight) : null,
+        activityLevel: activityLevel || null,
       },
     });
     return { success: true, user };

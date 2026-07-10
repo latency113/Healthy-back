@@ -80,6 +80,9 @@ export const UserScalarFieldEnum = {
   gender: 'gender',
   weight: 'weight',
   height: 'height',
+  goal: 'goal',
+  targetWeight: 'targetWeight',
+  activityLevel: 'activityLevel',
   dailyCalorieGoal: 'dailyCalorieGoal',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

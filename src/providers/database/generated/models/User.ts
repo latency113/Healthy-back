@@ -29,12 +29,14 @@ export type AggregateUser = {
 export type UserAvgAggregateOutputType = {
   weight: number | null
   height: number | null
+  targetWeight: number | null
   dailyCalorieGoal: number | null
 }
 
 export type UserSumAggregateOutputType = {
   weight: number | null
   height: number | null
+  targetWeight: number | null
   dailyCalorieGoal: number | null
 }
 
@@ -46,6 +48,9 @@ export type UserMinAggregateOutputType = {
   gender: string | null
   weight: number | null
   height: number | null
+  goal: string | null
+  targetWeight: number | null
+  activityLevel: string | null
   dailyCalorieGoal: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -59,6 +64,9 @@ export type UserMaxAggregateOutputType = {
   gender: string | null
   weight: number | null
   height: number | null
+  goal: string | null
+  targetWeight: number | null
+  activityLevel: string | null
   dailyCalorieGoal: number | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -72,6 +80,9 @@ export type UserCountAggregateOutputType = {
   gender: number
   weight: number
   height: number
+  goal: number
+  targetWeight: number
+  activityLevel: number
   dailyCalorieGoal: number
   createdAt: number
   updatedAt: number
@@ -82,12 +93,14 @@ export type UserCountAggregateOutputType = {
 export type UserAvgAggregateInputType = {
   weight?: true
   height?: true
+  targetWeight?: true
   dailyCalorieGoal?: true
 }
 
 export type UserSumAggregateInputType = {
   weight?: true
   height?: true
+  targetWeight?: true
   dailyCalorieGoal?: true
 }
 
@@ -99,6 +112,9 @@ export type UserMinAggregateInputType = {
   gender?: true
   weight?: true
   height?: true
+  goal?: true
+  targetWeight?: true
+  activityLevel?: true
   dailyCalorieGoal?: true
   createdAt?: true
   updatedAt?: true
@@ -112,6 +128,9 @@ export type UserMaxAggregateInputType = {
   gender?: true
   weight?: true
   height?: true
+  goal?: true
+  targetWeight?: true
+  activityLevel?: true
   dailyCalorieGoal?: true
   createdAt?: true
   updatedAt?: true
@@ -125,6 +144,9 @@ export type UserCountAggregateInputType = {
   gender?: true
   weight?: true
   height?: true
+  goal?: true
+  targetWeight?: true
+  activityLevel?: true
   dailyCalorieGoal?: true
   createdAt?: true
   updatedAt?: true
@@ -225,6 +247,9 @@ export type UserGroupByOutputType = {
   gender: string | null
   weight: number | null
   height: number | null
+  goal: string | null
+  targetWeight: number | null
+  activityLevel: string | null
   dailyCalorieGoal: number
   createdAt: Date
   updatedAt: Date
@@ -261,6 +286,9 @@ export type UserWhereInput = {
   gender?: Prisma.StringNullableFilter<"User"> | string | null
   weight?: Prisma.FloatNullableFilter<"User"> | number | null
   height?: Prisma.FloatNullableFilter<"User"> | number | null
+  goal?: Prisma.StringNullableFilter<"User"> | string | null
+  targetWeight?: Prisma.FloatNullableFilter<"User"> | number | null
+  activityLevel?: Prisma.StringNullableFilter<"User"> | string | null
   dailyCalorieGoal?: Prisma.IntFilter<"User"> | number
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -276,6 +304,9 @@ export type UserOrderByWithRelationInput = {
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrderInput | Prisma.SortOrder
   height?: Prisma.SortOrderInput | Prisma.SortOrder
+  goal?: Prisma.SortOrderInput | Prisma.SortOrder
+  targetWeight?: Prisma.SortOrderInput | Prisma.SortOrder
+  activityLevel?: Prisma.SortOrderInput | Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -294,6 +325,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   gender?: Prisma.StringNullableFilter<"User"> | string | null
   weight?: Prisma.FloatNullableFilter<"User"> | number | null
   height?: Prisma.FloatNullableFilter<"User"> | number | null
+  goal?: Prisma.StringNullableFilter<"User"> | string | null
+  targetWeight?: Prisma.FloatNullableFilter<"User"> | number | null
+  activityLevel?: Prisma.StringNullableFilter<"User"> | string | null
   dailyCalorieGoal?: Prisma.IntFilter<"User"> | number
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -309,6 +343,9 @@ export type UserOrderByWithAggregationInput = {
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrderInput | Prisma.SortOrder
   height?: Prisma.SortOrderInput | Prisma.SortOrder
+  goal?: Prisma.SortOrderInput | Prisma.SortOrder
+  targetWeight?: Prisma.SortOrderInput | Prisma.SortOrder
+  activityLevel?: Prisma.SortOrderInput | Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -330,6 +367,9 @@ export type UserScalarWhereWithAggregatesInput = {
   gender?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   weight?: Prisma.FloatNullableWithAggregatesFilter<"User"> | number | null
   height?: Prisma.FloatNullableWithAggregatesFilter<"User"> | number | null
+  goal?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  targetWeight?: Prisma.FloatNullableWithAggregatesFilter<"User"> | number | null
+  activityLevel?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   dailyCalorieGoal?: Prisma.IntWithAggregatesFilter<"User"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -343,6 +383,9 @@ export type UserCreateInput = {
   gender?: string | null
   weight?: number | null
   height?: number | null
+  goal?: string | null
+  targetWeight?: number | null
+  activityLevel?: string | null
   dailyCalorieGoal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -358,6 +401,9 @@ export type UserUncheckedCreateInput = {
   gender?: string | null
   weight?: number | null
   height?: number | null
+  goal?: string | null
+  targetWeight?: number | null
+  activityLevel?: string | null
   dailyCalorieGoal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -373,6 +419,9 @@ export type UserUpdateInput = {
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  goal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activityLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dailyCalorieGoal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -388,6 +437,9 @@ export type UserUncheckedUpdateInput = {
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  goal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activityLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dailyCalorieGoal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -403,6 +455,9 @@ export type UserCreateManyInput = {
   gender?: string | null
   weight?: number | null
   height?: number | null
+  goal?: string | null
+  targetWeight?: number | null
+  activityLevel?: string | null
   dailyCalorieGoal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -416,6 +471,9 @@ export type UserUpdateManyMutationInput = {
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  goal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activityLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dailyCalorieGoal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -429,6 +487,9 @@ export type UserUncheckedUpdateManyInput = {
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  goal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activityLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dailyCalorieGoal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -442,6 +503,9 @@ export type UserCountOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  goal?: Prisma.SortOrder
+  targetWeight?: Prisma.SortOrder
+  activityLevel?: Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -450,6 +514,7 @@ export type UserCountOrderByAggregateInput = {
 export type UserAvgOrderByAggregateInput = {
   weight?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  targetWeight?: Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
 }
 
@@ -461,6 +526,9 @@ export type UserMaxOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  goal?: Prisma.SortOrder
+  targetWeight?: Prisma.SortOrder
+  activityLevel?: Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -474,6 +542,9 @@ export type UserMinOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   weight?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  goal?: Prisma.SortOrder
+  targetWeight?: Prisma.SortOrder
+  activityLevel?: Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -482,6 +553,7 @@ export type UserMinOrderByAggregateInput = {
 export type UserSumOrderByAggregateInput = {
   weight?: Prisma.SortOrder
   height?: Prisma.SortOrder
+  targetWeight?: Prisma.SortOrder
   dailyCalorieGoal?: Prisma.SortOrder
 }
 
@@ -558,6 +630,9 @@ export type UserCreateWithoutFoodLogsInput = {
   gender?: string | null
   weight?: number | null
   height?: number | null
+  goal?: string | null
+  targetWeight?: number | null
+  activityLevel?: string | null
   dailyCalorieGoal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -572,6 +647,9 @@ export type UserUncheckedCreateWithoutFoodLogsInput = {
   gender?: string | null
   weight?: number | null
   height?: number | null
+  goal?: string | null
+  targetWeight?: number | null
+  activityLevel?: string | null
   dailyCalorieGoal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -602,6 +680,9 @@ export type UserUpdateWithoutFoodLogsInput = {
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  goal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activityLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dailyCalorieGoal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -616,6 +697,9 @@ export type UserUncheckedUpdateWithoutFoodLogsInput = {
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  goal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activityLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dailyCalorieGoal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -630,6 +714,9 @@ export type UserCreateWithoutFeedbacksInput = {
   gender?: string | null
   weight?: number | null
   height?: number | null
+  goal?: string | null
+  targetWeight?: number | null
+  activityLevel?: string | null
   dailyCalorieGoal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -644,6 +731,9 @@ export type UserUncheckedCreateWithoutFeedbacksInput = {
   gender?: string | null
   weight?: number | null
   height?: number | null
+  goal?: string | null
+  targetWeight?: number | null
+  activityLevel?: string | null
   dailyCalorieGoal?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -674,6 +764,9 @@ export type UserUpdateWithoutFeedbacksInput = {
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  goal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activityLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dailyCalorieGoal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -688,6 +781,9 @@ export type UserUncheckedUpdateWithoutFeedbacksInput = {
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  goal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetWeight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  activityLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dailyCalorieGoal?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -742,6 +838,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   gender?: boolean
   weight?: boolean
   height?: boolean
+  goal?: boolean
+  targetWeight?: boolean
+  activityLevel?: boolean
   dailyCalorieGoal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -758,6 +857,9 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   gender?: boolean
   weight?: boolean
   height?: boolean
+  goal?: boolean
+  targetWeight?: boolean
+  activityLevel?: boolean
   dailyCalorieGoal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -771,6 +873,9 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   gender?: boolean
   weight?: boolean
   height?: boolean
+  goal?: boolean
+  targetWeight?: boolean
+  activityLevel?: boolean
   dailyCalorieGoal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -784,12 +889,15 @@ export type UserSelectScalar = {
   gender?: boolean
   weight?: boolean
   height?: boolean
+  goal?: boolean
+  targetWeight?: boolean
+  activityLevel?: boolean
   dailyCalorieGoal?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lineUserId" | "displayName" | "birthday" | "gender" | "weight" | "height" | "dailyCalorieGoal" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lineUserId" | "displayName" | "birthday" | "gender" | "weight" | "height" | "goal" | "targetWeight" | "activityLevel" | "dailyCalorieGoal" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   foodLogs?: boolean | Prisma.User$foodLogsArgs<ExtArgs>
   feedbacks?: boolean | Prisma.User$feedbacksArgs<ExtArgs>
@@ -812,6 +920,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     gender: string | null
     weight: number | null
     height: number | null
+    goal: string | null
+    targetWeight: number | null
+    activityLevel: string | null
     dailyCalorieGoal: number
     createdAt: Date
     updatedAt: Date
@@ -1247,6 +1358,9 @@ export interface UserFieldRefs {
   readonly gender: Prisma.FieldRef<"User", 'String'>
   readonly weight: Prisma.FieldRef<"User", 'Float'>
   readonly height: Prisma.FieldRef<"User", 'Float'>
+  readonly goal: Prisma.FieldRef<"User", 'String'>
+  readonly targetWeight: Prisma.FieldRef<"User", 'Float'>
+  readonly activityLevel: Prisma.FieldRef<"User", 'String'>
   readonly dailyCalorieGoal: Prisma.FieldRef<"User", 'Int'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
