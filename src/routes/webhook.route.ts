@@ -22,7 +22,7 @@ export const webhookRoutes = new Elysia()
         if (messageType === 'image') {
           // Trigger loading animation and send initial response using replyToken
           await showLoadingAnimation(lineUserId);
-          await replyToLine(replyToken, "AI กำลังวิเคราะห์รูปภาพอาหารให้อยู่น้าา รอแป๊บนึงนะค้าบ... 🍳✨");
+          await replyToLine(replyToken, "กำลังวิเคราะห์รูปภาพอาหารให้อยู่น้าา รอแป๊บนึงนะค้าบ... 🍳✨");
           try {
             const imageBuffer = await downloadLineMessageContent(messageId);
             const aiResult = await analyzeFoodImageWithGemini(imageBuffer);
@@ -59,8 +59,7 @@ export const webhookRoutes = new Elysia()
 
             // Trigger loading animation and send initial response using replyToken
             await showLoadingAnimation(lineUserId);
-            await replyToLine(replyToken, `กำลังค้นหาข้อมูลของ "${foodQuery}"... 🔍`);
-
+            await replyToLine(replyToken, `กำลังค้นหาข้อมูลของเมนู "${foodQuery}" ให้อยู่น้าา รอแป๊บนึงนะค้าบ... 🔍✨`);
             try {
               const aiResult = await analyzeFoodTextWithGemini(foodQuery);
 
