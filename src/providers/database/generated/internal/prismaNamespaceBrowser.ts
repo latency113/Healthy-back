@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   FoodLog: 'FoodLog',
-  Feedback: 'Feedback'
+  Feedback: 'Feedback',
+  AdminWhitelist: 'AdminWhitelist'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -116,6 +117,16 @@ export const FeedbackScalarFieldEnum = {
 } as const
 
 export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
+
+
+export const AdminWhitelistScalarFieldEnum = {
+  id: 'id',
+  lineUserId: 'lineUserId',
+  displayName: 'displayName',
+  createdAt: 'createdAt'
+} as const
+
+export type AdminWhitelistScalarFieldEnum = (typeof AdminWhitelistScalarFieldEnum)[keyof typeof AdminWhitelistScalarFieldEnum]
 
 
 export const SortOrder = {

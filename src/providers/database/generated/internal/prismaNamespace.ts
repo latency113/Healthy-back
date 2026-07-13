@@ -386,7 +386,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   FoodLog: 'FoodLog',
-  Feedback: 'Feedback'
+  Feedback: 'Feedback',
+  AdminWhitelist: 'AdminWhitelist'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -402,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "foodLog" | "feedback"
+    modelProps: "user" | "foodLog" | "feedback" | "adminWhitelist"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -628,6 +629,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AdminWhitelist: {
+      payload: Prisma.$AdminWhitelistPayload<ExtArgs>
+      fields: Prisma.AdminWhitelistFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdminWhitelistFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdminWhitelistFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload>
+        }
+        findFirst: {
+          args: Prisma.AdminWhitelistFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdminWhitelistFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload>
+        }
+        findMany: {
+          args: Prisma.AdminWhitelistFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload>[]
+        }
+        create: {
+          args: Prisma.AdminWhitelistCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload>
+        }
+        createMany: {
+          args: Prisma.AdminWhitelistCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdminWhitelistCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload>[]
+        }
+        delete: {
+          args: Prisma.AdminWhitelistDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload>
+        }
+        update: {
+          args: Prisma.AdminWhitelistUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdminWhitelistDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdminWhitelistUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdminWhitelistUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload>[]
+        }
+        upsert: {
+          args: Prisma.AdminWhitelistUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdminWhitelistPayload>
+        }
+        aggregate: {
+          args: Prisma.AdminWhitelistAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdminWhitelist>
+        }
+        groupBy: {
+          args: Prisma.AdminWhitelistGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminWhitelistGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdminWhitelistCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminWhitelistCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -711,6 +786,16 @@ export const FeedbackScalarFieldEnum = {
 } as const
 
 export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
+
+
+export const AdminWhitelistScalarFieldEnum = {
+  id: 'id',
+  lineUserId: 'lineUserId',
+  displayName: 'displayName',
+  createdAt: 'createdAt'
+} as const
+
+export type AdminWhitelistScalarFieldEnum = (typeof AdminWhitelistScalarFieldEnum)[keyof typeof AdminWhitelistScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -911,6 +996,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   foodLog?: Prisma.FoodLogOmit
   feedback?: Prisma.FeedbackOmit
+  adminWhitelist?: Prisma.AdminWhitelistOmit
 }
 
 /* Types for Logging */

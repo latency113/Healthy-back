@@ -11,4 +11,5 @@
 export type * from './models/User'
 export type * from './models/FoodLog'
 export type * from './models/Feedback'
+export type * from './models/AdminWhitelist'
 export type * from './commonInputTypes'

@@ -72,3 +72,13 @@ model Feedback {
 
   createdAt DateTime @default(now())
 }
+
+// ==================================================
+// 4. ตารางรายชื่อผู้ดูแลระบบที่มีสิทธิ์ (AdminWhitelist)
+// ==================================================
+model AdminWhitelist {
+  id          String   @id @default(uuid())
+  lineUserId  String   @unique // ID ของบัญชี LINE สำหรับแอดมินที่มีสิทธิ์
+  displayName String?  // ชื่อย่อ/โปรไฟล์แอดมิน
+  createdAt   DateTime @default(now())
+}

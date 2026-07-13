@@ -32,3 +32,8 @@ export type FoodLog = Prisma.FoodLogModel
  * 
  */
 export type Feedback = Prisma.FeedbackModel
+/**
+ * Model AdminWhitelist
+ * 
+ */
+export type AdminWhitelist = Prisma.AdminWhitelistModel

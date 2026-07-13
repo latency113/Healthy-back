@@ -43,3 +43,4 @@ package-lock.json
 /src/generated/prisma
 .env
 dist
+seed-admin.ts
