@@ -8,7 +8,7 @@ const app = new Elysia()
   .use(cors({
     origin: true, // อนุญาตทุกโดเมน (เหมาะสำหรับ Ngrok, Cloudflare, Vercel)
     credentials: true, // จำเป็นหากต้องส่ง Cookies หรือ Headers พิเศษ
-    allowedHeaders: ['Content-Type', 'ngrok-skip-browser-warning'],
+    allowedHeaders: ['Content-Type', 'ngrok-skip-browser-warning', 'Authorization', 'authorization'],
   }))
   .get('/', () => 'Health Chatbot Server is running!')
   .use(webhookRoutes)
