@@ -174,4 +174,53 @@ export const adminRoutes = new Elysia({ prefix: '/api/admin' })
 
       return buffer;
     })
+
+    // Get all whitelisted admins
+    .get('/whitelist', async () => {
+      return await prisma.adminWhitelist.findMany({
+        orderBy: { createdAt: 'desc' }
+      });
+    })
+
+    // Add user to whitelist
+    .post('/whitelist', async ({ body, set }) => {
+      const { lineUserId, displayName } = body as { lineUserId: string; displayName?: string };
+      if (!lineUserId) {
+        set.status = 400;
+        return { error: 'lineUserId is required' };
+      }
+
+      const existing = await prisma.adminWhitelist.findUnique({
+        where: { lineUserId }
+      });
+      if (existing) {
+        return { success: true, message: 'Already whitelisted', data: existing };
+      }
+
+      const created = await prisma.adminWhitelist.create({
+        data: {
+          lineUserId,
+          displayName: displayName || 'Admin'
+        }
+      });
+      return { success: true, message: 'Successfully whitelisted', data: created };
+    })
+
+    // Remove user from whitelist
+    .delete('/whitelist/:lineUserId', async ({ params, set }) => {
+      const { lineUserId } = params;
+      if (!lineUserId) {
+        set.status = 400;
+        return { error: 'lineUserId parameter is required' };
+      }
+
+      try {
+        await prisma.adminWhitelist.delete({
+          where: { lineUserId }
+        });
+        return { success: true, message: 'Successfully removed from whitelist' };
+      } catch (err) {
+        return { success: false, message: 'Whitelist entry not found' };
+      }
+    })
   );
