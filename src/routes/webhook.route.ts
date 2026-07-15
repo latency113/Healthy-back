@@ -41,14 +41,8 @@ export const webhookRoutes = new Elysia()
               }
             });
 
-            const summaryMessage = `📊 สรุปโภชนาการจากรูปภาพมาแล้วค้าบ:\n\n🍳 เมนูคือ: ${aiResult.foodName}\n
-            🔥 พลังงาน: ${aiResult.calories} kcal\n🥩 
-            โปรตีน: ${aiResult.protein} กรัม\n🥑 
-            ไขมัน: ${aiResult.fat} กรัม\n🍞 
-            คาร์บ: ${aiResult.carbs} กรัม\n\n
-            📝 แอดมินบันทึกประวัติการกิน ให้เรียบร้อยแล้วน๊า! 💖 \n
-            เช็คประวัติการกินได้ที่นี่ ${web}`;
-                       
+            const summaryMessage = `📊 สรุปโภชนาการจากรูปภาพมาแล้วค้าบ:\n\n🍳 เมนูคือ: ${aiResult.foodName}\n🔥 พลังงาน: ${aiResult.calories} kcal\n🥩 โปรตีน: ${aiResult.protein} กรัม\n🥑 ไขมัน: ${aiResult.fat} กรัม\n🍞 คาร์บ: ${aiResult.carbs} กรัม\n\n📝 แอดมินบันทึกประวัติการกิน ให้เรียบร้อยแล้วน๊า! 💖 \nเช็คประวัติการกินได้ที่นี่ ${web}`;
+
             await pushToLine(lineUserId, summaryMessage);
 
           } catch (error) {
@@ -82,11 +76,7 @@ export const webhookRoutes = new Elysia()
                 });
               }
 
-              const summaryMessage = `📊 ปิ๊งป่อง! ผลลัพธ์โภชนาการของ (${foodQuery}) มาแล้วค้าบ:\n\n🍳 เมนู: ${aiResult.foodName}\n
-              🔥 พลังงาน: ${aiResult.calories} kcal\n
-              🥩 โปรตีน: ${aiResult.protein} กรัม\n
-              🥑 ไขมัน: ${aiResult.fat} กรัม\n
-              🍞 คาร์บ: ${aiResult.carbs} กรัม\n\n${isSave ? `✅ เย้! บันทึกข้อมูลเข้าคลังเรียบร้อยค้าบ 📝 \nเช็คประวัติการกินได้ที่นี่ ${web}` : `💡 อันนี้ AI เช็คแคลอรีให้ดูเฉยๆ น้า ไม่ได้บันทึกลงไปค้าบ 🔍`}`;
+              const summaryMessage = `📊 ปิ๊งป่อง! ผลลัพธ์โภชนาการของ (${foodQuery}) มาแล้วค้าบ:\n\n🍳 เมนู: ${aiResult.foodName}\n🔥 พลังงาน: ${aiResult.calories} kcal\n🥩 โปรตีน: ${aiResult.protein} กรัม\n🥑 ไขมัน: ${aiResult.fat} กรัม\n🍞 คาร์บ: ${aiResult.carbs} กรัม\n\n${isSave ? `✅ เย้! บันทึกข้อมูลเข้าคลังเรียบร้อยค้าบ 📝 \nเช็คประวัติการกินได้ที่นี่ ${web}` : `💡 อันนี้ AI เช็คแคลอรีให้ดูเฉยๆ น้า ไม่ได้บันทึกลงไปค้าบ 🔍`}`;
               await pushToLine(lineUserId, summaryMessage);
 
             } catch (error) {
