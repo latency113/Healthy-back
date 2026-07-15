@@ -13,6 +13,7 @@ export const webhookRoutes = new Elysia()
         const replyToken = event.replyToken;
         const messageType = event.message.type;
         const messageId = event.message.id;
+        const web = process.env.WEB_URL;
 
         let user = await prisma.user.findUnique({ where: { lineUserId } });
         if (!user) {
@@ -20,7 +21,6 @@ export const webhookRoutes = new Elysia()
         }
 
         if (messageType === 'image') {
-          // Trigger loading animation and send initial response using replyToken
           await showLoadingAnimation(lineUserId);
           await replyToLine(replyToken, "กำลังวิเคราะห์รูปภาพอาหารให้อยู่น้าา รอแป๊บนึงนะค้าบ... 🍳✨");
           try {
@@ -41,12 +41,18 @@ export const webhookRoutes = new Elysia()
               }
             });
 
-            const summaryMessage = `📊 สรุปโภชนาการจากรูปภาพมาแล้วค้าบ:\n\n🍳 เมนูคือ: ${aiResult.foodName}\n🔥 พลังงาน: ${aiResult.calories} kcal\n🥩 โปรตีน: ${aiResult.protein} กรัม\n🥑 ไขมัน: ${aiResult.fat} กรัม\n🍞 คาร์บ: ${aiResult.carbs} กรัม\n\n📝 แอดมินบันทึกประวัติการกิน ให้เรียบร้อยแล้วน๊า! 💖`;            // Send final message using push (replyToken is already consumed)
+            const summaryMessage = `📊 สรุปโภชนาการจากรูปภาพมาแล้วค้าบ:\n\n🍳 เมนูคือ: ${aiResult.foodName}\n
+            🔥 พลังงาน: ${aiResult.calories} kcal\n🥩 
+            โปรตีน: ${aiResult.protein} กรัม\n🥑 
+            ไขมัน: ${aiResult.fat} กรัม\n🍞 
+            คาร์บ: ${aiResult.carbs} กรัม\n\n
+            📝 แอดมินบันทึกประวัติการกิน ให้เรียบร้อยแล้วน๊า! 💖 \n
+            เช็คประวัติการกินได้ที่นี่ ${web}`;
+                       
             await pushToLine(lineUserId, summaryMessage);
 
           } catch (error) {
             console.error(error);
-            // Send error message using push
             await pushToLine(lineUserId, "ระบบแอบงงงวย วิเคราะห์รูปภาพนี้ไม่ได้เลยค้าบ ลองส่งรูปมาให้ AI ดูใหม่อีกรอบน๊าา 📸✨");
           }
 
@@ -57,7 +63,6 @@ export const webhookRoutes = new Elysia()
             const isSave = text.startsWith('เพิ่ม ');
             const foodQuery = text.replace('เพิ่ม ', '').replace('ถามแคล ', '');
 
-            // Trigger loading animation and send initial response using replyToken
             await showLoadingAnimation(lineUserId);
             await replyToLine(replyToken, `กำลังค้นหาข้อมูลของเมนู "${foodQuery}" ให้อยู่น้าา รอแป๊บนึงนะค้าบ... 🔍✨`);
             try {
@@ -77,12 +82,15 @@ export const webhookRoutes = new Elysia()
                 });
               }
 
-              const summaryMessage = `📊 ปิ๊งป่อง! ผลลัพธ์โภชนาการของ (${foodQuery}) มาแล้วค้าบ:\n\n🍳 เมนู: ${aiResult.foodName}\n🔥 พลังงาน: ${aiResult.calories} kcal\n🥩 โปรตีน: ${aiResult.protein} กรัม\n🥑 ไขมัน: ${aiResult.fat} กรัม\n🍞 คาร์บ: ${aiResult.carbs} กรัม\n\n${isSave ? '✅ เย้! บันทึกข้อมูลเข้าคลังเรียบร้อยค้าบ 📝' : '💡 อันนี้ AI เช็คแคลอรีให้ดูเฉยๆ น้า ไม่ได้บันทึกลงไปค้าบ 🔍'}`;              // Send final message using push (replyToken is already consumed)
+              const summaryMessage = `📊 ปิ๊งป่อง! ผลลัพธ์โภชนาการของ (${foodQuery}) มาแล้วค้าบ:\n\n🍳 เมนู: ${aiResult.foodName}\n
+              🔥 พลังงาน: ${aiResult.calories} kcal\n
+              🥩 โปรตีน: ${aiResult.protein} กรัม\n
+              🥑 ไขมัน: ${aiResult.fat} กรัม\n
+              🍞 คาร์บ: ${aiResult.carbs} กรัม\n\n${isSave ? `✅ เย้! บันทึกข้อมูลเข้าคลังเรียบร้อยค้าบ 📝 \nเช็คประวัติการกินได้ที่นี่ ${web}` : `💡 อันนี้ AI เช็คแคลอรีให้ดูเฉยๆ น้า ไม่ได้บันทึกลงไปค้าบ 🔍`}`;
               await pushToLine(lineUserId, summaryMessage);
 
             } catch (error) {
               console.error(error);
-              // Send error message using push
               await pushToLine(lineUserId, "โอ๊ะโอ! 😵‍💫 AI หาข้อมูลโภชนาการของเมนูนี้ไม่เจอเลยค้าบ ลองพิมพ์ชื่อเมนูแบบอื่นดูอีกทีน๊า 🧐");
             }
           }
