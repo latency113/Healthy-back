@@ -7,7 +7,7 @@ export async function analyzeFoodImageWithGemini(imageBuffer: Buffer) {
     "foodName": "ชื่อเมนูภาษาไทย",
     "calories": 0.0,
     "protein": 0.0,
-    "fat": 0.0
+    "fat": 0.0,
     "carbs": 0.0
   }`;
 

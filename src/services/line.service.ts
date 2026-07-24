@@ -12,17 +12,25 @@ export async function downloadLineMessageContent(messageId: string): Promise<Buf
 
 // 2. ฟังก์ชันส่งข้อความตอบกลับไปยังแอป LINE
 export async function replyToLine(replyToken: string, textMessage: string) {
-  await fetch('https://api.line.me/v2/bot/message/reply', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${LINE_ACCESS_TOKEN}`
-    },
-    body: JSON.stringify({
-      replyToken: replyToken,
-      messages: [{ type: 'text', text: textMessage }]
-    })
-  });
+  try {
+    const response = await fetch('https://api.line.me/v2/bot/message/reply', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${LINE_ACCESS_TOKEN}`
+      },
+      body: JSON.stringify({
+        replyToken: replyToken,
+        messages: [{ type: 'text', text: textMessage }]
+      })
+    });
+    if (!response.ok) {
+      const errText = await response.text();
+      console.error("เกิดข้อผิดพลาดในการส่งข้อความไปหาแอป LINE", errText);
+    }
+  } catch (error) {
+    console.error("เกิดข้อผิดพลาดในการส่งข้อความไปหาแอป LINE", error);
+  }
 }
 // 3. ฟังก์ชันแสดง Loading Animation
 export async function showLoadingAnimation(userId: string) {
@@ -59,9 +67,9 @@ export async function pushToLine(userId: string, textMessage: string) {
     });
     if (!response.ok) {
       const errText = await response.text();
-      console.error("Push to LINE failed:", errText);
+      console.error("เกิดข้อผิดพลาดในการส่งข้อความไปหาแอป LINE", errText);
     }
   } catch (error) {
-    console.error("Push Message Error:", error);
+    console.error("เกิดข้อผิดพลาดในการส่งข้อความไปหาแอป LINE", error);
   }
 }
