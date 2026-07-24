@@ -11,7 +11,11 @@ export async function downloadLineMessageContent(messageId: string): Promise<Buf
 }
 
 // 2. ฟังก์ชันส่งข้อความตอบกลับไปยังแอป LINE
-export async function replyToLine(replyToken: string, textMessage: string) {
+export async function replyToLine(replyToken: string, textMessage: string | string[]) {
+  const messages = Array.isArray(textMessage)
+    ? textMessage.map(txt => ({ type: 'text', text: txt }))
+    : [{ type: 'text', text: textMessage }];
+
   try {
     const response = await fetch('https://api.line.me/v2/bot/message/reply', {
       method: 'POST',
@@ -21,7 +25,7 @@ export async function replyToLine(replyToken: string, textMessage: string) {
       },
       body: JSON.stringify({
         replyToken: replyToken,
-        messages: [{ type: 'text', text: textMessage }]
+        messages: messages
       })
     });
     if (!response.ok) {
